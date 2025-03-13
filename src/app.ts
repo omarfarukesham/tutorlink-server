@@ -10,6 +10,7 @@ import { OrderRoutes } from './module/order/order.routes';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { CheckoutRoutes } from './module/checkout/checkout.routes';
+import subjectRouter from './module/subject/subject.router';
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use('/api/user', userRouter);
 // app.use('/api/products', ProductRoutes);
 // app.use('/api/orders', OrderRoutes);
 app.use('/api/checkouts', CheckoutRoutes);
+app.use('/api/subject', subjectRouter)
 
 app.get('/', (req: Request, res: Response) => {
   res.send({
