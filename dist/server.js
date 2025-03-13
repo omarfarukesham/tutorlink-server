@@ -20,7 +20,7 @@ function server() {
         try {
             yield mongoose_1.default.connect(config_1.default.database_url);
             app_1.default.listen(config_1.default.port, () => {
-                console.log(`boitoi Server is running on port ${config_1.default.port} - Alhamdulillah`);
+                console.log(`tutor Server is running on port ${config_1.default.port} - Alhamdulillah`);
             });
         }
         catch (error) {

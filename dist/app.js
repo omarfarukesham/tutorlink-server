@@ -6,12 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const user_router_1 = __importDefault(require("./module/user/user.router"));
 const auth_router_1 = __importDefault(require("./module/auth/auth.router"));
-const blog_router_1 = __importDefault(require("./module/blog/blog.router"));
 const globalErrorHandler_1 = require("./middlewares/globalErrorHandler");
 const admin_router_1 = __importDefault(require("./module/admin/admin.router"));
 const notFound_1 = __importDefault(require("./middlewares/notFound"));
-const product_routes_1 = require("./module/product/product.routes");
-const order_routes_1 = require("./module/order/order.routes");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const checkout_routes_1 = require("./module/checkout/checkout.routes");
@@ -37,9 +34,9 @@ app.use((0, cookie_parser_1.default)());
 app.use('/api/auth', auth_router_1.default);
 app.use('/api/admin', admin_router_1.default);
 app.use('/api/user', user_router_1.default);
-app.use('/api/blogs', blog_router_1.default);
-app.use('/api/products', product_routes_1.ProductRoutes);
-app.use('/api/orders', order_routes_1.OrderRoutes);
+// app.use('/api/blogs', blogRouter);
+// app.use('/api/products', ProductRoutes);
+// app.use('/api/orders', OrderRoutes);
 app.use('/api/checkouts', checkout_routes_1.CheckoutRoutes);
 app.get('/', (req, res) => {
     res.send({
