@@ -28,6 +28,8 @@ const userValidationSchema = z.object({
       })
       .default("user"),
 
+    profileImg: z.string().optional(),
+
     isBlocked: z.boolean().default(false),
 
     createdAt: z.date().default(() => new Date()),

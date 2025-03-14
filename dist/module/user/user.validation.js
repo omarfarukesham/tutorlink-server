@@ -26,6 +26,7 @@ const userValidationSchema = zod_1.z.object({
             required_error: "Role must be provided and must be 'admin' or 'user' or 'tutor' or 'student'",
         })
             .default("user"),
+        profileImg: zod_1.z.string().optional(),
         isBlocked: zod_1.z.boolean().default(false),
         createdAt: zod_1.z.date().default(() => new Date()),
         updatedAt: zod_1.z.date().default(() => new Date()),
