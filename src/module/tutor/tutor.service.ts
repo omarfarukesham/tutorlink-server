@@ -18,7 +18,9 @@ const getTutors = async (query: Record<string, unknown>) => {
     // .paginate()
     .select();
 
-  const result = await tutors.modelQuery.populate('user', 'name email');
+  const result = await tutors.modelQuery
+      .populate('user', 'name email')
+      .populate('subjects')
   return result;
 };
 

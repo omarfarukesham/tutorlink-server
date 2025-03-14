@@ -13,6 +13,10 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const checkout_routes_1 = require("./module/checkout/checkout.routes");
 const subject_router_1 = __importDefault(require("./module/subject/subject.router"));
+const tutor_router_1 = __importDefault(require("./module/tutor/tutor.router"));
+const review_router_1 = __importDefault(require("./module/review/review.router"));
+const booking_router_1 = __importDefault(require("./module/booking/booking.router"));
+const payment_router_1 = __importDefault(require("./module/payment/payment.router"));
 const app = (0, express_1.default)();
 // CORS configuration has solved the issue
 const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174'];
@@ -40,6 +44,10 @@ app.use('/api/user', user_router_1.default);
 // app.use('/api/orders', OrderRoutes);
 app.use('/api/checkouts', checkout_routes_1.CheckoutRoutes);
 app.use('/api/subject', subject_router_1.default);
+app.use('/api/tutor/', tutor_router_1.default);
+app.use('/api/review', review_router_1.default);
+app.use('/api/booking', booking_router_1.default);
+app.use('/api/payment', payment_router_1.default);
 app.get('/', (req, res) => {
     res.send({
         status: true,

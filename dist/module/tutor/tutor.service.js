@@ -29,7 +29,9 @@ const getTutors = (query) => __awaiter(void 0, void 0, void 0, function* () {
         .sort()
         // .paginate()
         .select();
-    const result = yield tutors.modelQuery.populate('user', 'name email');
+    const result = yield tutors.modelQuery
+        .populate('user', 'name email')
+        .populate('subjects');
     return result;
 });
 // Get a single tutor by ID

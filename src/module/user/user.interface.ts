@@ -4,7 +4,8 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
-    role: "admin" | "user" | "tutor";
+    role: "admin" | "user" | "tutor" | "student";
+    profileImg?: string;
     isBlocked: boolean;
     createdAt: Date;
     updatedAt: Date;

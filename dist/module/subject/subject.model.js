@@ -10,6 +10,12 @@ const subjectSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
+    description: {
+        type: String,
+    },
+    image: {
+        type: String,
+    },
     category: {
         type: String,
         required: true,

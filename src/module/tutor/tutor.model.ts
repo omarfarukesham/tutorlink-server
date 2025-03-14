@@ -12,6 +12,9 @@ const tutorSchema = new Schema<ITutor>(
       type: String,
       required: true,
     },
+    profileImg: {
+      type: String,
+    },
     subjects: [
       {
         type: Schema.Types.ObjectId,

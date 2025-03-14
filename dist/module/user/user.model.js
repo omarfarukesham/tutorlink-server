@@ -40,9 +40,12 @@ const userSchema = new mongoose_1.Schema({
         maxlength: 20,
         select: false,
     },
+    profileImg: {
+        type: String,
+    },
     role: {
         type: String,
-        enum: ["admin", "user"],
+        enum: ["admin", "student", 'tutor', 'user'],
         default: "user",
     },
     isBlocked: {

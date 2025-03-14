@@ -22,8 +22,8 @@ const userValidationSchema = zod_1.z.object({
             .min(4, { message: "Password must be at least 4 characters long" })
             .max(20, { message: "Password cannot exceed 20 characters" }),
         role: zod_1.z
-            .enum(["admin", "user"], {
-            required_error: "Role must be provided and must be 'admin' or 'user'",
+            .enum(["admin", "user", 'tutor', 'student'], {
+            required_error: "Role must be provided and must be 'admin' or 'user' or 'tutor' or 'student'",
         })
             .default("user"),
         isBlocked: zod_1.z.boolean().default(false),

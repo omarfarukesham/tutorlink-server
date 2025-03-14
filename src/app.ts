@@ -11,6 +11,10 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { CheckoutRoutes } from './module/checkout/checkout.routes';
 import subjectRouter from './module/subject/subject.router';
+import tutorRouter from './module/tutor/tutor.router';
+import reviewRouter from './module/review/review.router';
+import bookingRouter from './module/booking/booking.router';
+import paymentRouter from './module/payment/payment.router';
 
 const app = express();
 
@@ -42,6 +46,10 @@ app.use('/api/user', userRouter);
 // app.use('/api/orders', OrderRoutes);
 app.use('/api/checkouts', CheckoutRoutes);
 app.use('/api/subject', subjectRouter)
+app.use('/api/tutor/', tutorRouter)
+app.use('/api/review', reviewRouter)
+app.use('/api/booking', bookingRouter)
+app.use('/api/payment', paymentRouter)
 
 app.get('/', (req: Request, res: Response) => {
   res.send({

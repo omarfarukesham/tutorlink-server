@@ -11,6 +11,12 @@ const subjectSchema = new Schema<ISubject>(
       type: String,
       required: true,
     },
+    description: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
     category: {
       type: String,
       required: true,
