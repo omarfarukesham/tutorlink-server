@@ -1,3 +1,12 @@
-node_modules
+# Environment files
 .env
-.vercel
+dbPassword.txt
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+
+# Optional: Ignore package-lock.json if not needed
+# package-lock.json

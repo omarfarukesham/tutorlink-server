@@ -44,7 +44,7 @@ app.use('/api/user', userRouter);
 // app.use('/api/blogs', blogRouter);
 // app.use('/api/products', ProductRoutes);
 // app.use('/api/orders', OrderRoutes);
-app.use('/api/checkouts', CheckoutRoutes);
+// app.use('/api/checkouts', CheckoutRoutes);
 app.use('/api/subject', subjectRouter)
 app.use('/api/tutor/', tutorRouter)
 app.use('/api/review', reviewRouter)
