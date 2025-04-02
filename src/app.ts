@@ -19,7 +19,7 @@ import paymentRouter from './module/payment/payment.router';
 const app = express();
 
 // CORS configuration has solved the issue
-const allowedOrigins = ['http://localhost:5173','http://localhost:3000', 'http://localhost:5174'];
+const allowedOrigins = ['http://localhost:5173','http://localhost:3000', 'http://localhost:5174', 'https://tutorlink-frontend-blond.vercel.app'];
 
 app.use(cors({
   origin: function (origin, callback) {

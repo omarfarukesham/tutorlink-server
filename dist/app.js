@@ -18,7 +18,7 @@ const booking_router_1 = __importDefault(require("./module/booking/booking.route
 const payment_router_1 = __importDefault(require("./module/payment/payment.router"));
 const app = (0, express_1.default)();
 // CORS configuration has solved the issue
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174'];
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174', 'https://tutorlink-frontend-blond.vercel.app'];
 app.use((0, cors_1.default)({
     origin: function (origin, callback) {
         if (!origin)
