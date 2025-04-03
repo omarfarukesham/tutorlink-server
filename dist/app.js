@@ -43,7 +43,7 @@ app.use('/api/user', user_router_1.default);
 // app.use('/api/orders', OrderRoutes);
 // app.use('/api/checkouts', CheckoutRoutes);
 app.use('/api/subject', subject_router_1.default);
-app.use('/api/tutor/', tutor_router_1.default);
+app.use('/api/tutor', tutor_router_1.default);
 app.use('/api/review', review_router_1.default);
 app.use('/api/booking', booking_router_1.default);
 app.use('/api/payment', payment_router_1.default);

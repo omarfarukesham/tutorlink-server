@@ -7,6 +7,7 @@ class QueryBuilder {
     }
     search(searchableFields) {
         const searchTerm = this.query.search;
+        console.log(searchTerm);
         if (searchTerm && searchableFields.length > 0) {
             const searchQuery = {
                 $or: searchableFields.map((field) => ({
@@ -21,9 +22,9 @@ class QueryBuilder {
         const queryObj = Object.assign({}, this.query);
         const excludedFields = ['search', 'page', 'limit', 'sortOrder', 'sortBy', 'fields'];
         excludedFields.forEach((key) => delete queryObj[key]);
-        if (queryObj.filter) {
-            queryObj.author = queryObj.filter;
-            delete queryObj.filter;
+        const filterQuery = {};
+        for (const [key, value] of Object.entries(queryObj)) {
+            filterQuery[key] = { $regex: new RegExp(value, 'i') };
         }
         this.modelQuery = this.modelQuery.find(queryObj);
         return this;

@@ -11,18 +11,48 @@ const createTutor = async (payload: ITutor): Promise<ITutor> => {
 
 // Get all tutors with search, filtering, and pagination
 const getTutors = async (query: Record<string, unknown>) => {
-  const tutors = new QueryBuilder(Tutor.find(), query)
-    .search(['bio', 'subjects'])
-    .filter()
-    .sort()
-    // .paginate()
-    .select();
+  const searchTerm = query.search ? query.search as string : '';
+  const categoryFilter = query.category ? query.category as string : '';
 
-  const result = await tutors.modelQuery
-      .populate('user', 'name email')
-      .populate('subjects')
+  const aggregationPipeline: any[] = [
+    {
+      $lookup: {
+        from: 'subjects', 
+        localField: 'subjects',
+        foreignField: '_id',
+        as: 'subjects'
+      }
+    }
+  ];
+
+  // If search term exists, apply $match for search
+  if (searchTerm) {
+    aggregationPipeline.push({
+      $match: {
+        $or: [
+          { bio: { $regex: searchTerm, $options: 'i' } }, // Search in bio
+          { 'subjects.name': { $regex: searchTerm, $options: 'i' } } // Search in subjects
+        ]
+      }
+    });
+  }
+
+  // If category filter exists, apply $match for category
+  if (categoryFilter) {
+    aggregationPipeline.push({
+      $match: {
+        'subjects.category': categoryFilter // Exact match for category
+      }
+    });
+  }
+
+  const result = await Tutor.aggregate(aggregationPipeline);
+
   return result;
 };
+
+
+
 
 // Get a single tutor by ID
 const getSingleTutor = async (id: string): Promise<ITutor | null> => {

@@ -13,8 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tutorService = void 0;
-// import QueryBuilder from '../../builder/queryBuilder';
-const querybuilder_1 = __importDefault(require("../../builder/querybuilder"));
 const tutor_model_1 = __importDefault(require("./tutor.model"));
 // Create a tutor profile
 const createTutor = (payload) => __awaiter(void 0, void 0, void 0, function* () {
@@ -23,15 +21,38 @@ const createTutor = (payload) => __awaiter(void 0, void 0, void 0, function* () 
 });
 // Get all tutors with search, filtering, and pagination
 const getTutors = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    const tutors = new querybuilder_1.default(tutor_model_1.default.find(), query)
-        .search(['bio', 'subjects'])
-        .filter()
-        .sort()
-        // .paginate()
-        .select();
-    const result = yield tutors.modelQuery
-        .populate('user', 'name email')
-        .populate('subjects');
+    const searchTerm = query.search ? query.search : '';
+    const categoryFilter = query.category ? query.category : '';
+    const aggregationPipeline = [
+        {
+            $lookup: {
+                from: 'subjects',
+                localField: 'subjects',
+                foreignField: '_id',
+                as: 'subjects'
+            }
+        }
+    ];
+    // If search term exists, apply $match for search
+    if (searchTerm) {
+        aggregationPipeline.push({
+            $match: {
+                $or: [
+                    { bio: { $regex: searchTerm, $options: 'i' } }, // Search in bio
+                    { 'subjects.name': { $regex: searchTerm, $options: 'i' } } // Search in subjects
+                ]
+            }
+        });
+    }
+    // If category filter exists, apply $match for category
+    if (categoryFilter) {
+        aggregationPipeline.push({
+            $match: {
+                'subjects.category': categoryFilter // Exact match for category
+            }
+        });
+    }
+    const result = yield tutor_model_1.default.aggregate(aggregationPipeline);
     return result;
 });
 // Get a single tutor by ID
