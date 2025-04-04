@@ -22,6 +22,24 @@ const getTutors = async (query: Record<string, unknown>) => {
         foreignField: '_id',
         as: 'subjects'
       }
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'user',
+        foreignField: '_id',
+        as: 'user'
+      }
+    },
+    {
+      $unwind: '$user' // Convert user array to object
+    },
+    {
+      $project: {
+        'user.password': 0,  // Exclude sensitive user data
+        'user.createdAt': 0,
+        'user.updatedAt': 0
+      }
     }
   ];
 
@@ -30,8 +48,8 @@ const getTutors = async (query: Record<string, unknown>) => {
     aggregationPipeline.push({
       $match: {
         $or: [
-          { bio: { $regex: searchTerm, $options: 'i' } }, // Search in bio
-          { 'subjects.name': { $regex: searchTerm, $options: 'i' } } // Search in subjects
+          { bio: { $regex: searchTerm, $options: 'i' } },
+          { 'subjects.name': { $regex: searchTerm, $options: 'i' } }
         ]
       }
     });
@@ -41,7 +59,7 @@ const getTutors = async (query: Record<string, unknown>) => {
   if (categoryFilter) {
     aggregationPipeline.push({
       $match: {
-        'subjects.category': categoryFilter // Exact match for category
+        'subjects.category': categoryFilter
       }
     });
   }
@@ -56,7 +74,10 @@ const getTutors = async (query: Record<string, unknown>) => {
 
 // Get a single tutor by ID
 const getSingleTutor = async (id: string): Promise<ITutor | null> => {
-  const result = await Tutor.findById(id).populate('user', 'name email');
+  const result = await Tutor.findById(id)
+    .populate('user', 'name email')
+    .populate('subjects')  
+    .lean(); 
   return result;
 };
 

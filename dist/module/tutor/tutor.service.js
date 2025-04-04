@@ -31,6 +31,24 @@ const getTutors = (query) => __awaiter(void 0, void 0, void 0, function* () {
                 foreignField: '_id',
                 as: 'subjects'
             }
+        },
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'user',
+                foreignField: '_id',
+                as: 'user'
+            }
+        },
+        {
+            $unwind: '$user' // Convert user array to object
+        },
+        {
+            $project: {
+                'user.password': 0, // Exclude sensitive user data
+                'user.createdAt': 0,
+                'user.updatedAt': 0
+            }
         }
     ];
     // If search term exists, apply $match for search
@@ -38,8 +56,8 @@ const getTutors = (query) => __awaiter(void 0, void 0, void 0, function* () {
         aggregationPipeline.push({
             $match: {
                 $or: [
-                    { bio: { $regex: searchTerm, $options: 'i' } }, // Search in bio
-                    { 'subjects.name': { $regex: searchTerm, $options: 'i' } } // Search in subjects
+                    { bio: { $regex: searchTerm, $options: 'i' } },
+                    { 'subjects.name': { $regex: searchTerm, $options: 'i' } }
                 ]
             }
         });
@@ -48,7 +66,7 @@ const getTutors = (query) => __awaiter(void 0, void 0, void 0, function* () {
     if (categoryFilter) {
         aggregationPipeline.push({
             $match: {
-                'subjects.category': categoryFilter // Exact match for category
+                'subjects.category': categoryFilter
             }
         });
     }
@@ -57,7 +75,10 @@ const getTutors = (query) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // Get a single tutor by ID
 const getSingleTutor = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield tutor_model_1.default.findById(id).populate('user', 'name email');
+    const result = yield tutor_model_1.default.findById(id)
+        .populate('user', 'name email')
+        .populate('subjects')
+        .lean();
     return result;
 });
 // Update a tutor profile
