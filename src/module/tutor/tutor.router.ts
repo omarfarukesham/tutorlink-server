@@ -10,7 +10,7 @@ const tutorRouter = Router();
 // Create a tutor profile (accessible by users)
 tutorRouter.post(
   '/',
-  auth(USER_ROLE.tutor),
+  // auth(USER_ROLE.tutor),
 //   validateRequest(TutorValidation.createTutorSchema),
   tutorController.createTutor,
 );

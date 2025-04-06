@@ -9,9 +9,9 @@ export interface ITutor {
     startTime: string; // Start time (e.g., "09:00")
     endTime: string; // End time (e.g., "17:00")
   }[];
-  profileImg?: string; // Profile image URL
+  tutorImg?: string; // Profile image URL
   hourlyRate: number; // Hourly rate
-  earnings: number; // Total earnings
+  earnings?: number; // Total earnings
   createdAt: Date;
   updatedAt: Date;
 }

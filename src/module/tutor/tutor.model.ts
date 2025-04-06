@@ -12,7 +12,7 @@ const tutorSchema = new Schema<ITutor>(
       type: String,
       required: true,
     },
-    profileImg: {
+    tutorImg: {
       type: String,
     },
     subjects: [

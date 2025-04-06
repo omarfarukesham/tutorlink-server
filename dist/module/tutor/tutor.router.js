@@ -10,7 +10,8 @@ const auth_1 = __importDefault(require("../../middlewares/auth"));
 const user_constants_1 = require("../user/user.constants");
 const tutorRouter = (0, express_1.Router)();
 // Create a tutor profile (accessible by users)
-tutorRouter.post('/', (0, auth_1.default)(user_constants_1.USER_ROLE.tutor), 
+tutorRouter.post('/', 
+// auth(USER_ROLE.tutor),
 //   validateRequest(TutorValidation.createTutorSchema),
 tutor_controller_1.tutorController.createTutor);
 // Get all tutors (public route)

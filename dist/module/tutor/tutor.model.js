@@ -11,7 +11,7 @@ const tutorSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
-    profileImg: {
+    tutorImg: {
         type: String,
     },
     subjects: [
