@@ -80,6 +80,14 @@ const getSingleTutor = async (id: string): Promise<ITutor | null> => {
     .lean(); 
   return result;
 };
+const getSingleTutorByUserId  = async (userId: string): Promise<ITutor | null> => { 
+  const result = await Tutor.findOne({ user: userId })
+    .populate('user', 'name email')
+    .populate('subjects')  
+    .lean(); 
+  return result;
+}
+
 
 // Update a tutor profile
 const updateTutor = async (
@@ -129,5 +137,6 @@ export const tutorService = {
   getSingleTutor,
   updateTutor,
   updateTutorByUserId,
+  getSingleTutorByUserId,
   deleteTutor,
 };

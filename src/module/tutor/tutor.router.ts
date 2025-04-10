@@ -24,6 +24,11 @@ tutorRouter.get(
   '/:id',
   tutorController.getSingleTutor,
 );
+// Get a single tutor by ID (public route)
+tutorRouter.get(
+  '/user/:id',
+  tutorController.getSingleTutorByUserId,
+);
 
 // Update a tutor profile (accessible by tutors)
 tutorRouter.patch(

@@ -16,6 +16,8 @@ tutor_controller_1.tutorController.createTutor);
 tutorRouter.get('/', tutor_controller_1.tutorController.getTutors);
 // Get a single tutor by ID (public route)
 tutorRouter.get('/:id', tutor_controller_1.tutorController.getSingleTutor);
+// Get a single tutor by ID (public route)
+tutorRouter.get('/user/:id', tutor_controller_1.tutorController.getSingleTutorByUserId);
 // Update a tutor profile (accessible by tutors)
 tutorRouter.patch('/:id', (0, auth_1.default)(user_constants_1.USER_ROLE.tutor), 
 //   validateRequest(TutorValidation.updateTutorSchema),

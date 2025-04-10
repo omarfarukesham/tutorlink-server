@@ -49,6 +49,15 @@ const getSingleTutor = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
         data: result,
     });
 }));
+const getSingleTutorByUserId = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.id;
+    const result = yield tutor_service_1.tutorService.getSingleTutorByUserId(userId);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_codes_1.StatusCodes.OK,
+        message: 'Tutor fetched successfully',
+        data: result,
+    });
+}));
 // Update a tutor profile
 const updateTutor = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const tutorId = req.params.id;
@@ -88,5 +97,6 @@ exports.tutorController = {
     getSingleTutor,
     updateTutor,
     updateTutorByUser,
+    getSingleTutorByUserId,
     deleteTutor,
 };

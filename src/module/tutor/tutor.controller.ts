@@ -46,6 +46,16 @@ const getSingleTutor = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleTutorByUserId = catchAsync(async (req, res) => {
+  const userId = req.params.id;
+  const result = await tutorService.getSingleTutorByUserId(userId);
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    message: 'Tutor fetched successfully',
+    data: result,
+  });
+});
+
 // Update a tutor profile
 const updateTutor = catchAsync(async (req, res) => {
   const tutorId = req.params.id;
@@ -92,5 +102,6 @@ export const tutorController = {
   getSingleTutor,
   updateTutor,
   updateTutorByUser,
+  getSingleTutorByUserId,
   deleteTutor,
 };

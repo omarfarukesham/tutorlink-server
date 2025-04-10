@@ -81,6 +81,13 @@ const getSingleTutor = (id) => __awaiter(void 0, void 0, void 0, function* () {
         .lean();
     return result;
 });
+const getSingleTutorByUserId = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield tutor_model_1.default.findOne({ user: userId })
+        .populate('user', 'name email')
+        .populate('subjects')
+        .lean();
+    return result;
+});
 // Update a tutor profile
 const updateTutor = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield tutor_model_1.default.findByIdAndUpdate(id, payload, {
@@ -113,5 +120,6 @@ exports.tutorService = {
     getSingleTutor,
     updateTutor,
     updateTutorByUserId,
+    getSingleTutorByUserId,
     deleteTutor,
 };
