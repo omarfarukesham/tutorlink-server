@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const tutor_controller_1 = require("./tutor.controller");
-// import { TutorValidation } from './tutor.validation';
 const auth_1 = __importDefault(require("../../middlewares/auth"));
 const user_constants_1 = require("../user/user.constants");
 const tutorRouter = (0, express_1.Router)();
@@ -21,6 +20,8 @@ tutorRouter.get('/:id', tutor_controller_1.tutorController.getSingleTutor);
 tutorRouter.patch('/:id', (0, auth_1.default)(user_constants_1.USER_ROLE.tutor), 
 //   validateRequest(TutorValidation.updateTutorSchema),
 tutor_controller_1.tutorController.updateTutor);
+// Update a tutor profile following user ID (accessible by tutors)
+tutorRouter.patch('/user/:id', (0, auth_1.default)(user_constants_1.USER_ROLE.tutor), tutor_controller_1.tutorController.updateTutorByUser);
 // Delete a tutor profile (accessible by tutors)
 tutorRouter.delete('/:id', (0, auth_1.default)(user_constants_1.USER_ROLE.tutor), tutor_controller_1.tutorController.deleteTutor);
 exports.default = tutorRouter;

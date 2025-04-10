@@ -92,6 +92,25 @@ const updateTutor = async (
   return result;
 };
 
+// Update a tutor profile by user ID
+const updateTutorByUserId = async (
+  userId: string,
+  payload: Partial<ITutor>,
+): Promise<ITutor | null> => {
+  const tutor = await Tutor.findOne({ user: userId });
+  
+  if (!tutor) {
+    throw new Error('Tutor not found');
+  }
+
+  const result = await Tutor.findByIdAndUpdate(tutor._id, payload, {
+    new: true,
+  });
+  
+  return result;
+};
+
+
 // Delete a tutor profile
 const deleteTutor = async (
   tutorId: string,
@@ -109,5 +128,6 @@ export const tutorService = {
   getTutors,
   getSingleTutor,
   updateTutor,
+  updateTutorByUserId,
   deleteTutor,
 };

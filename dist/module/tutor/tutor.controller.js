@@ -60,6 +60,16 @@ const updateTutor = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, vo
         data: result,
     });
 }));
+const updateTutorByUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.params.id;
+    const body = req.body;
+    const result = yield tutor_service_1.tutorService.updateTutorByUserId(userId, body);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_codes_1.StatusCodes.OK,
+        message: 'Tutor profile updated successfully',
+        data: result,
+    });
+}));
 // Delete a tutor profile
 const deleteTutor = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -77,5 +87,6 @@ exports.tutorController = {
     getTutors,
     getSingleTutor,
     updateTutor,
+    updateTutorByUser,
     deleteTutor,
 };

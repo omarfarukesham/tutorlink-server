@@ -60,6 +60,18 @@ const updateTutor = catchAsync(async (req, res) => {
   });
 });
 
+const updateTutorByUser = catchAsync(async (req, res) => {
+  const userId = req.params.id;
+  const body = req.body;
+  const result = await tutorService.updateTutorByUserId(userId, body);
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    message: 'Tutor profile updated successfully',
+    data: result,
+  });
+});
+
 // Delete a tutor profile
 const deleteTutor = catchAsync(async (req, res) => {
   const tutorId = req.params.id;
@@ -79,5 +91,6 @@ export const tutorController = {
   getTutors,
   getSingleTutor,
   updateTutor,
+  updateTutorByUser,
   deleteTutor,
 };

@@ -88,6 +88,17 @@ const updateTutor = (id, payload) => __awaiter(void 0, void 0, void 0, function*
     });
     return result;
 });
+// Update a tutor profile by user ID
+const updateTutorByUserId = (userId, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const tutor = yield tutor_model_1.default.findOne({ user: userId });
+    if (!tutor) {
+        throw new Error('Tutor not found');
+    }
+    const result = yield tutor_model_1.default.findByIdAndUpdate(tutor._id, payload, {
+        new: true,
+    });
+    return result;
+});
 // Delete a tutor profile
 const deleteTutor = (tutorId, userId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield tutor_model_1.default.findOneAndDelete({
@@ -101,5 +112,6 @@ exports.tutorService = {
     getTutors,
     getSingleTutor,
     updateTutor,
+    updateTutorByUserId,
     deleteTutor,
 };

@@ -1,7 +1,5 @@
 import { Router } from 'express';
-import validateRequest from '../../middlewares/validateRequest';
 import { tutorController } from './tutor.controller';
-// import { TutorValidation } from './tutor.validation';
 import auth from '../../middlewares/auth';
 import { USER_ROLE } from '../user/user.constants';
 
@@ -34,6 +32,14 @@ tutorRouter.patch(
 //   validateRequest(TutorValidation.updateTutorSchema),
   tutorController.updateTutor,
 );
+
+// Update a tutor profile following user ID (accessible by tutors)
+tutorRouter.patch(
+  '/user/:id',
+  auth(USER_ROLE.tutor),
+  tutorController.updateTutorByUser,
+);
+
 
 // Delete a tutor profile (accessible by tutors)
 tutorRouter.delete(
