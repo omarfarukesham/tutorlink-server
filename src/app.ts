@@ -1,15 +1,11 @@
 import express, { Request, Response } from 'express';
 import userRouter from './module/user/user.router';
 import authRouter from './module/auth/auth.router';
-import blogRouter from './module/blog/blog.router';
 import { globalErrorHandler } from './middlewares/globalErrorHandler';
 import adminRouter from './module/admin/admin.router';
 import notFound from './middlewares/notFound';
-import { ProductRoutes } from './module/product/product.routes';
-import { OrderRoutes } from './module/order/order.routes';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import { CheckoutRoutes } from './module/checkout/checkout.routes';
 import subjectRouter from './module/subject/subject.router';
 import tutorRouter from './module/tutor/tutor.router';
 import reviewRouter from './module/review/review.router';
